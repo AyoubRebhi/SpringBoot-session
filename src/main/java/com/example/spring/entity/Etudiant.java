@@ -9,13 +9,14 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "etudiant")
+
 public class Etudiant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +27,8 @@ public class Etudiant implements Serializable {
     private String ecole;
     private Date dateNaissance;
 
-
-    @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
-    private Set<Reservation> reservations;
-
+    @OneToMany(mappedBy = "etudiant")
+    private List<Reservation> reservations;
 
 
 }

@@ -8,13 +8,13 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "chambre")
 public class Chambre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,6 @@ public class Chambre implements Serializable {
     private Bloc bloc;
 
     @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL)
-    private Set<Reservation> reservations;
-
+    private List<Reservation> reservations;
 
 }

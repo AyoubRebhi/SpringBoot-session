@@ -15,11 +15,12 @@ import jakarta.persistence.Entity;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "reservation")
+
 public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // If auto-increment is needed
     private Long idReservation;
-
     @Temporal(TemporalType.DATE)
     private Date anneeUniversitaire;
     private boolean estValide;

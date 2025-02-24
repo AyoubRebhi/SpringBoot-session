@@ -8,13 +8,14 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "foyer")
+
 public class Foyer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +27,8 @@ public class Foyer implements Serializable {
     @JoinColumn(name = "universite_id")
     private Universite universite;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "foyer")
-    private Set<Bloc> blocs;
+    @OneToMany(mappedBy = "foyer")
+    private List<Bloc> blocs;
 
 
 }

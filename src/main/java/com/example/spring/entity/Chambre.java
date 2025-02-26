@@ -29,5 +29,8 @@ public class Chambre implements Serializable {
 
     @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
+    public void setBloc(Bloc bloc) {
+        this.bloc = bloc;
+    }
 
 }

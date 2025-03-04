@@ -1,6 +1,7 @@
 package com.example.spring.controller;
 
 import com.example.spring.entity.Chambre;
+import com.example.spring.entity.TypeChambre;
 import com.example.spring.services.IChambreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,4 +34,10 @@ public class ChambreController {
         return chambreService.retrieveChambre(id);
     }
 
+    @GetMapping("/nonReservees")
+    public List<Chambre> getChambresNonReserveParNomUniversiteEtTypeChambre(
+            @RequestParam String nomUniversite,
+            @RequestParam TypeChambre type) {
+        return chambreService.getChambresNonReserveParNomUniversiteEtTypeChambre(nomUniversite, type);
+    }
 }

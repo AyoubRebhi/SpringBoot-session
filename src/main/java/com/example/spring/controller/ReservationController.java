@@ -5,6 +5,7 @@ import com.example.spring.services.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -25,5 +26,12 @@ public class ReservationController {
     @GetMapping("/get-reservation/{id}")
     public Reservation retrieveReservation(@PathVariable("id") Long id){
         return reservationService.retrieveReservation(id);
+    }
+
+    @GetMapping("/par-annee-universitaire-et-universite")
+    public List<Reservation> getReservationParAnneeUniversitaireEtNomUniversite(
+            @RequestParam Date anneeUniversitaire,
+            @RequestParam String nomUniversite) {
+        return reservationService.getReservationParAnneeUniversitaireEtNomUniversite(anneeUniversitaire, nomUniversite);
     }
 }

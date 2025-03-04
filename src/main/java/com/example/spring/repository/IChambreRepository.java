@@ -17,4 +17,11 @@ public interface IChambreRepository extends CrudRepository<Chambre,Long> {
             "AND c.typeC = :type " +
             "AND c NOT IN (SELECT r.chambre FROM Reservation r WHERE r.anneeUniversitaire = FUNCTION('YEAR', CURRENT_DATE))")
     List<Chambre> findChambresNonReservees(String nomUniversite, TypeChambre type);
+
+    // Solution 1: Using JPQL Query
+    @Query("SELECT c FROM Chambre c WHERE c.bloc.idBloc = :idBloc AND c.typeC = :typeC")
+    List<Chambre> findChambresByBlocAndTypeJPQL(long idBloc, TypeChambre typeC);
+
+    // Solution 2: Using Spring Data JPA Keywords
+    List<Chambre> findByBlocIdBlocAndTypeC(long idBloc, TypeChambre typeC);
 }

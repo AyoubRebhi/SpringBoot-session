@@ -33,4 +33,7 @@ public class Bloc implements Serializable {
         this.foyer = foyer;
     }
 
+    public void setIdBloc(long idBloc) {
+        this.idBloc = idBloc;
+    }
 }

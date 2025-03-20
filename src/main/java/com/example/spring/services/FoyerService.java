@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class FoyerService implements IFoyerService{
 
     @Autowired
@@ -18,7 +19,8 @@ public class FoyerService implements IFoyerService{
 
     @Override
     public List<Foyer> retrieveAllFoyers() {
-        return (List<Foyer>) foyerRepository.findAll();
+            List<Foyer> all = (List<Foyer>) foyerRepository.findAll();
+        return all;
     }
 
     @Override

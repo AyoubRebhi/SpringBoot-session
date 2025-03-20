@@ -15,6 +15,9 @@ import java.util.List;
 public class UniversiteService implements IUniversiteService{
     @Autowired
     IUniversiteRepository universiteRepository;
+    @Autowired
+    IFoyerRepository foyerRepository; // ✅ Correctly injected
+
     @Override
     public List<Universite> retrieveAllUniversities() {
         return (List<Universite>) universiteRepository.findAll();
@@ -39,4 +42,27 @@ public class UniversiteService implements IUniversiteService{
     public Universite updateUniversite(Universite u) {
         return universiteRepository.save(u);
     }
+
+    @Override
+    public Universite affecterFoyerAUniversite(long idUniversite, String nomFoyer){
+        Universite universite = universiteRepository.findById(idUniversite)
+                .orElseThrow(() -> new EntityNotFoundException("Reservation not found with id: " + idUniversite));
+        Foyer foyer = foyerRepository.findByNomFoyerJPQL(nomFoyer);
+        if (foyer == null) {
+            throw new EntityNotFoundException("Foyer introuvable avec le nom: " + nomFoyer);
+        }
+        universite.setFoyer(foyer);
+        universiteRepository.save(universite);
+        return universite;
+    }
+    @Override
+    public Universite desaffecterFoyerAUniversite(long idUniversite) {
+        Universite universite = universiteRepository.findById(idUniversite)
+                .orElseThrow(() -> new EntityNotFoundException("Reservation not found with id: " + idUniversite));
+        universite.setFoyer(null);
+        universiteRepository.save(universite);
+        return universite;
+
+    }
+
 }

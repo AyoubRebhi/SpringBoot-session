@@ -14,7 +14,7 @@ public class FoyerController {
     @Autowired
     IFoyerService foyerService;
 
-    @GetMapping("/get-all")
+    @GetMapping("/get")
     public List<Foyer> getAll(){
         return foyerService.retrieveAllFoyers();
     }

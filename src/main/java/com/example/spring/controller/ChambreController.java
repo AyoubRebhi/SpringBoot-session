@@ -14,25 +14,27 @@ public class ChambreController {
     @Autowired
     IChambreService chambreService;
 
-    @GetMapping("/get-all")
-    public List<Chambre> getAll(){
-        return chambreService.retrieveAllChambres();
+    @GetMapping("/getchambres")
+    public List<Chambre> getChambres (){
+
+        return (List<Chambre>) chambreService.retrieveAllChambres();
     }
 
-    @PostMapping("/add-Chambre")
-    public Chambre addChambres(@RequestBody Chambre chambre){
+    @PostMapping("/addchambre")
+    public Chambre addChambre (@RequestBody Chambre chambre){
         return chambreService.addChambre(chambre);
     }
 
-    @PutMapping("/update-Chambre")
-    public Chambre updateChambre(@RequestBody Chambre f){
-        return chambreService.updateChambre(f);
+    @PutMapping("/updatechambre")
+    public Chambre updateChambre (@RequestBody Chambre chambre){
+        return chambreService.updateChambre(chambre);
     }
 
-    @GetMapping("/get-Chambre/{id}")
-    public Chambre getChambre(@PathVariable("id") Long id){
-        return chambreService.retrieveChambre(id);
+    @GetMapping("/getchambre/{id}")
+    public void getChambre (@PathVariable("id") long id){
+        chambreService.retrieveChambre(id);
     }
+
 
     @GetMapping("/nonReservees")
     public List<Chambre> getChambresNonReserveParNomUniversiteEtTypeChambre(
@@ -40,10 +42,17 @@ public class ChambreController {
             @RequestParam TypeChambre type) {
         return chambreService.getChambresNonReserveParNomUniversiteEtTypeChambre(nomUniversite, type);
     }
-    @GetMapping("/parbloc-type")
+
+    @GetMapping("/bloc&type")
     public List<Chambre> getChambresParBlocEtType(
             @RequestParam long idBloc,
             @RequestParam TypeChambre typeC) {
         return chambreService.getChambresParBlocEtType(idBloc, typeC);
     }
+
+    @GetMapping("/universite/{nomUniversite}")
+    public List<Chambre> getChambresParNomUniversite(@PathVariable String nomUniversite) {
+        return chambreService.getChambresParNomUniversite(nomUniversite);
+    }
+
 }

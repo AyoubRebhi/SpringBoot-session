@@ -14,27 +14,33 @@ public class FoyerController {
     @Autowired
     IFoyerService foyerService;
 
-    @GetMapping("/get")
-    public List<Foyer> getAll(){
-        return foyerService.retrieveAllFoyers();
+    @GetMapping("/getfoyers")
+    public List<Foyer> getFoyers (){
+        return (List<Foyer>) foyerService.retrieveAllFoyers();
     }
 
-    @PostMapping("/add-foyer")
-    public Foyer addFoyer(@RequestBody Foyer f){
-        return foyerService.addFoyer(f);
+    @PostMapping("/addfoyer")
+    public Foyer addFoyer (@RequestBody Foyer foyer){
+        return foyerService.addFoyer(foyer);
     }
 
-    @PutMapping("/update-foyer")
-    public Foyer updateFoyer(@RequestBody Foyer f){
-        return foyerService.updateFoyer(f);
+    @PutMapping("/updatefoyer")
+    public Foyer updateFoyer (@RequestBody Foyer foyer){
+        return foyerService.updateFoyer(foyer);
     }
 
-    @GetMapping("/get-foyer/{id}")
-    public Foyer getFoyer(@PathVariable("id") Long id){
+    @GetMapping("/getfoyer/{id}")
+    public Foyer getFoyer (@PathVariable("id") long id){
         return foyerService.retrieveFoyer(id);
     }
-    @DeleteMapping("/delete-foyer/{id}")
-    public void removeFoyer(@PathVariable("id") Long id){
+
+    @DeleteMapping("/removefoyer/{id}")
+    public void removeFoyer (@PathVariable("id") long id){
         foyerService.removeFoyer(id);
+    }
+
+    @PostMapping("/ajouter/{idUniversite}")
+    public Foyer ajouterFoyerEtAffecterAUniversite(@RequestBody Foyer foyer, @PathVariable long idUniversite) {
+        return foyerService.ajouterFoyerEtAffecterAUniversite(foyer, idUniversite);
     }
 }

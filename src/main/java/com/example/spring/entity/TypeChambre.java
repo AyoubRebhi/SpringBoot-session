@@ -1,5 +1,21 @@
 package com.example.spring.entity;
 
 public enum TypeChambre {
-    Simple, Double, Triple
+    SIMPLE(1),
+    DOUBLE(2),
+    TRIPLE(3);
+
+    private int capacite;
+
+    TypeChambre(int capacite) {
+        this.capacite = capacite;
+    }
+
+    public int getCapacite() {
+        return capacite;
+    }
+
+    public void setCapacite(int i) {
+        this.capacite = i ;
+    }
 }

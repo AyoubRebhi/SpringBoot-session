@@ -11,8 +11,7 @@ import java.util.List;
 public class EtudiantService implements IEtudiantService{
 
     @Autowired
-    IEtudiantRepository etudiantRepository;
-
+    IEtudiantRepository etudiantRepository ;
     @Override
     public List<Etudiant> retrieveAllEtudiants() {
         return (List<Etudiant>) etudiantRepository.findAll();
@@ -29,12 +28,12 @@ public class EtudiantService implements IEtudiantService{
     }
 
     @Override
-    public Etudiant retrieveEtudiant(Long idEtudiant) {
+    public Etudiant retrieveEtudiant(long idEtudiant) {
         return etudiantRepository.findById(idEtudiant).orElse(null);
     }
 
     @Override
-    public void removeEtudiant(Long idEtudiant) {
+    public void removeEtudiant(long idEtudiant) {
         etudiantRepository.deleteById(idEtudiant);
     }
 }

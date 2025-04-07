@@ -16,7 +16,7 @@ public class UniversiteService implements IUniversiteService{
     @Autowired
     IUniversiteRepository universiteRepository;
     @Autowired
-    IFoyerRepository foyerRepository; // ✅ Correctly injected
+    IFoyerRepository foyerRepository;
 
     @Override
     public List<Universite> retrieveAllUniversities() {
@@ -29,40 +29,43 @@ public class UniversiteService implements IUniversiteService{
     }
 
     @Override
-    public Universite UpdateUniversite(Universite u) {
-        return universiteRepository.save(u);
-    }
-
-    @Override
-    public Universite retrieveUniversite(Long idUniversite) {
-        return universiteRepository.findById(idUniversite).orElse(null);
-    }
-
-    @Override
     public Universite updateUniversite(Universite u) {
         return universiteRepository.save(u);
     }
 
     @Override
-    public Universite affecterFoyerAUniversite(long idUniversite, String nomFoyer){
-        Universite universite = universiteRepository.findById(idUniversite)
-                .orElseThrow(() -> new EntityNotFoundException("Reservation not found with id: " + idUniversite));
-        Foyer foyer = foyerRepository.findByNomFoyerJPQL(nomFoyer);
-        if (foyer == null) {
-            throw new EntityNotFoundException("Foyer introuvable avec le nom: " + nomFoyer);
-        }
-        universite.setFoyer(foyer);
-        universiteRepository.save(universite);
-        return universite;
+    public Universite retrieveUniversite(long idUniversite) {
+        return universiteRepository.findById(idUniversite).orElse(null);
     }
-    @Override
-    public Universite desaffecterFoyerAUniversite(long idUniversite) {
-        Universite universite = universiteRepository.findById(idUniversite)
-                .orElseThrow(() -> new EntityNotFoundException("Reservation not found with id: " + idUniversite));
-        universite.setFoyer(null);
-        universiteRepository.save(universite);
-        return universite;
 
+    @Override
+    public Universite affecterFoyerAUniversite (long idFoyer, String nomUniversite){
+
+        Universite universite = universiteRepository.findByNomUniversite(nomUniversite);
+        Foyer foyer = foyerRepository.findById(idFoyer).orElse(null);
+        universite.setFoyer(foyer);
+        foyer.setUniversite(null);
+
+        return universiteRepository.save(universite);
     }
+
+    @Override
+    public Universite desaffecterFoyerAUniversite (long idUniversite){
+        Universite universite = universiteRepository.findById(idUniversite).orElse(null);
+
+        universite.setFoyer(null);
+        return universiteRepository.save(universite);
+    }
+
+    @Override
+    public Foyer ajouterFoyerEtAffecterAUniversite(Foyer foyer, long idUniversite) {
+        Universite universite = universiteRepository.findById(idUniversite).orElse(null);
+
+        foyer = foyerRepository.save(foyer);
+        universite.setFoyer(foyer);
+
+        return foyerRepository.save(foyer);
+    }
+
 
 }

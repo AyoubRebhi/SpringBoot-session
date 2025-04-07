@@ -5,9 +5,12 @@ import com.example.spring.entity.Bloc;
 import java.util.List;
 
 public interface IBlocService {
-    public List<Bloc> retrieveAllBlocs();
-    public Bloc updateBloc(Bloc bloc);
-    public Bloc addBloc(Bloc bloc);
-    public Bloc retrieveBloc(Long idBloc);
-    public void removeBloc(Long idBloc);
+    List<Bloc> retrieveBlocs();
+    Bloc updateBloc (Bloc bloc);
+    Bloc addBloc (Bloc bloc);
+    Bloc retrieveBloc (long idBloc);
+    void removeBloc (long idBloc);
+
+    public Bloc affecterChambresABloc(List<Long> numChambres, long idBloc);
+
 }

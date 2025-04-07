@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface IUniversiteRepository extends JpaRepository<Universite,Long> {
+    public Universite findByNomUniversite (String nomUniversite);
 }
 

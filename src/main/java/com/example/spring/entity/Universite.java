@@ -57,4 +57,5 @@ public class Universite implements Serializable {
     public void setFoyer(Foyer foyer) {
         this.foyer = foyer;
     }
+
 }

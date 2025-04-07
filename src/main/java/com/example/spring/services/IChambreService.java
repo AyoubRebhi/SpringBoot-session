@@ -6,12 +6,14 @@ import com.example.spring.entity.TypeChambre;
 import java.util.List;
 
 public interface IChambreService {
-    public List<Chambre> retrieveAllChambres();
-    public Chambre addChambre(Chambre c);
-    public Chambre updateChambre(Chambre c);
-    public Chambre retrieveChambre(Long idChambre) ;
+    List<Chambre> retrieveAllChambres();
+    Chambre addChambre(Chambre chambre);
+    Chambre updateChambre (Chambre chambre);
+    Chambre retrieveChambre (long idChambre);
 
     List<Chambre> getChambresNonReserveParNomUniversiteEtTypeChambre(String nomUniversite, TypeChambre type);
     List<Chambre> getChambresParBlocEtType(long idBloc, TypeChambre typeC);
+
+    public List<Chambre> getChambresParNomUniversite(String nomUniversite);
 
 }

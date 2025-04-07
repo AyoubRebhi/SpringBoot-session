@@ -13,27 +13,28 @@ public class EtudiantController {
     @Autowired
     IEtudiantService etudiantService;
 
-    @GetMapping("/get-all")
-    public List<Etudiant> getAll(){
-        return etudiantService.retrieveAllEtudiants();
+    @GetMapping("/getetudiants")
+    public List<Etudiant> getEtudiants (){
+        return (List<Etudiant>) etudiantService.retrieveAllEtudiants();
     }
 
-    @PostMapping("/add-Etudiant")
-    public List<Etudiant> addEtudiants(@RequestBody List<Etudiant> etudiants){
-        return etudiantService.addEtudiants(etudiants);
+    @PostMapping("/addetudiants")
+    public List<Etudiant> addEtudiants (@RequestBody List<Etudiant> etudiants){
+        return (List<Etudiant>) etudiantService.addEtudiants(etudiants);
     }
 
-    @PutMapping("/update-Etudiant")
-    public Etudiant updateEtudiant(@RequestBody Etudiant f){
-        return etudiantService.updateEtudiant(f);
+    @PutMapping("/updateetudiant")
+    public Etudiant updateEtudiant (@RequestBody Etudiant etudiant){
+        return etudiantService.updateEtudiant(etudiant);
     }
 
-    @GetMapping("/get-Etudiant/{id}")
-    public Etudiant getEtudiant(@PathVariable("id") Long id){
+    @GetMapping("/getetudiant/{id}")
+    public Etudiant getEtudiant (@PathVariable("id") long id){
         return etudiantService.retrieveEtudiant(id);
     }
-    @DeleteMapping("/delete-Etudiant/{id}")
-    public void removeEtudiant(@PathVariable("id") Long id){
+
+    @DeleteMapping("/removeetudiant/{id}")
+    public void removeEtudiant (@PathVariable("id") long id){
         etudiantService.removeEtudiant(id);
     }
 }

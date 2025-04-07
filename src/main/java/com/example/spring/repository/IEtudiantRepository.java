@@ -9,4 +9,7 @@ import java.util.List;
 
 @Repository
 public interface IEtudiantRepository extends CrudRepository<Etudiant,Long> {
+    public Etudiant findEtudiantByIdEtudiant(long id);
+
+    public Etudiant findByCin(long cinEtudiant);
 }

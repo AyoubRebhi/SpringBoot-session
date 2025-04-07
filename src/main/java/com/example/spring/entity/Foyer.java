@@ -69,4 +69,5 @@ public class Foyer implements Serializable {
     public void setBlocs(List<Bloc> blocs) {
         this.blocs = blocs;
     }
+
 }

@@ -2,6 +2,7 @@ package com.example.spring.controller;
 
 import com.example.spring.entity.Universite;
 import com.example.spring.services.IUniversiteService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,37 +15,37 @@ public class UniversiteController {
     @Autowired
     IUniversiteService universiteService;
 
-    @PostMapping("/add-universite")
-    public Universite addUniversite(@RequestBody Universite u){
-        return universiteService.addUniversite(u);
-    }
-
-    @GetMapping("/get-all")
-    public List<Universite> retrieveAll(){
+    @GetMapping("/getuniversites")
+    public List<Universite> getUniversites (){
         return universiteService.retrieveAllUniversities();
     }
 
-    @PutMapping("/update")
-    public Universite updateUniversite(@RequestBody  Universite u ){
-        return universiteService.updateUniversite(u);
+    @PostMapping("/adduniversite")
+    public Universite addUniversite (@RequestBody Universite universite){
+        return universiteService.addUniversite(universite);
     }
 
-    @GetMapping("/find/{id}")
-    public Universite retrieveUniversite(@PathVariable("id") Long id)
-    {
+    @GetMapping("/getuniversite/{id}")
+    public Universite getUniversite (@PathVariable Long id){
         return universiteService.retrieveUniversite(id);
     }
 
-    @PutMapping("/affecter-universite/{idUniversite}")
-    public Universite affectUniversite(@PathVariable("idUniversite") long idUniversite, @RequestBody Map<String, String> request) {
-        String nomFoyer = request.get("nomFoyer");  // Extract "nomFoyer" from JSON body
-        return universiteService.affecterFoyerAUniversite(idUniversite, nomFoyer);
+    @PutMapping("/updateuniversite")
+    public Universite updateUniversite (@RequestBody Universite universite){
+        return universiteService.updateUniversite(universite);
     }
 
-    @PutMapping("/desaffecter-universite/{idUniversite}")
-    public Universite desaffectUniversite(@PathVariable("idUniversite") long e) {
-        return universiteService.desaffecterFoyerAUniversite(e);
+    @PutMapping("/affecter-foyer/{idFoyer}/{nomUniversite}")
+    @JsonIgnore
+    public Universite affecterFoyerAUniversite(
+            @PathVariable long idFoyer,
+            @PathVariable String nomUniversite) {
+        return universiteService.affecterFoyerAUniversite(idFoyer, nomUniversite);
     }
 
+    @PutMapping("/desaffecter-foyer/{idUniversite}")
+    public Universite desaffecterFoyerAUniversite (@PathVariable long idUniversite){
+        return universiteService.desaffecterFoyerAUniversite(idUniversite);
+    }
 
 }

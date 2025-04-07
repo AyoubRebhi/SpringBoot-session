@@ -5,9 +5,11 @@ import com.example.spring.entity.Foyer;
 import java.util.List;
 
 public interface IFoyerService {
-    public List<Foyer> retrieveAllFoyers();
-    public Foyer addFoyer(Foyer f);
-    public Foyer updateFoyer(Foyer f);
-    public Foyer retrieveFoyer(Long idFoyer);
-    public void removeFoyer(Long idFoyer);
+    List<Foyer> retrieveAllFoyers();
+    Foyer addFoyer (Foyer f);
+    Foyer updateFoyer (Foyer f);
+    Foyer retrieveFoyer (long idFoyer);
+    void removeFoyer (long idFoyer);
+
+    public Foyer ajouterFoyerEtAffecterAUniversite(Foyer foyer, long idUniversite);
 }
